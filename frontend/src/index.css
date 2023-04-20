@@ -1,0 +1,30 @@
+* {
+  box-sizing: border-box ; 
+  margin: 0;
+  padding: 0;
+  /* height: 100%; */
+  /* width: 100%; */
+}
+
+div {
+  height: 100%;
+  width: 100%;
+}
+
+body, html{
+  background: #4CB8C4;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #3CD3AD, #4CB8C4);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #3CD3AD, #4CB8C4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  width: 100%;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
