@@ -7,15 +7,15 @@
     margin-bottom: 3%;
 }
 
-.logo{
+.logo {
     width: 15%;
     font-size: 4vw;
-    font-family:monospace;
-    background-color:darkgoldenrod;
+    font-family: monospace;
+    background-color: darkgoldenrod;
     text-align: center;
 }
 
-.grid{
+.grid {
     height: 78%;
     width: 90%;
     /* background-color: whitesmoke; */
@@ -23,18 +23,18 @@
     overflow: hidden;
 }
 
-.topdiv{
+.topdiv {
     display: block;
 }
 
-.pic{
+.pic {
     width: 40%;
     height: 100%;
     float: right;
     border-radius: 5%;
 }
 
-.info{
+.info {
     margin-left: 15%;
     margin-top: 10%;
     width: 30%;
@@ -44,7 +44,7 @@
     border-radius: 5%;
 }
 
-.infoTwo{
+.infoTwo {
     margin-left: 20%;
     margin-top: 5%;
     width: 20%;
@@ -55,15 +55,15 @@
     line-height: 25px;
 }
 
-.mainFont{
+.mainFont {
     font-size: 50px;
 }
 
-.secondFont{
+.secondFont {
     font-size: 20px;
 }
 
-.signUpButton{
+.signUpButton {
     margin-left: 20%;
     margin-top: 5%;
     width: 20%;

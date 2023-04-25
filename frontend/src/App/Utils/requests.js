@@ -30,7 +30,7 @@ export const makePostRequest = (url, body, headers) => {
                 });
             });
     }).catch((err) => {
-        return returnErrorMessage(err.errorMessage)
+        return returnErrorMessage(err.errorMessage);
     });
 };
 
@@ -58,32 +58,30 @@ export const makePostRequest = (url, body, headers) => {
 //         returnErrorMessage()
 //         }
 
-
-
-            // .then((res) => res.json())
-            // .then((res) => {
-            //     if (!res) {
-            //         return {
-            //             error: true,
-            //             errorMessage: 'An unexpected error occurred',
-            //             data: null,
-            //         }
-            //     } else if (res.error) {
-            //         return res
-            //     }
-            //     else{
-            //         return res
-            //     }
-            // })
-            // .catch((err) => {
-            //     console.error("unhbanled error", err)
-            // });
+// .then((res) => res.json())
+// .then((res) => {
+//     if (!res) {
+//         return {
+//             error: true,
+//             errorMessage: 'An unexpected error occurred',
+//             data: null,
+//         }
+//     } else if (res.error) {
+//         return res
+//     }
+//     else{
+//         return res
+//     }
+// })
+// .catch((err) => {
+//     console.error("unhbanled error", err)
+// });
 // };
 
 const returnErrorMessage = (message) => {
-    return ({
+    return {
         error: true,
         errorMessage: message,
         data: null,
-    })
-}
+    };
+};
