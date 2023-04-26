@@ -6,4 +6,4 @@ const errorMessage = (message) => {
     };
 };
 
-module.exports = errorMessage
+module.exports = errorMessage;
