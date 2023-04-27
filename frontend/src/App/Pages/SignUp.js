@@ -14,9 +14,11 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import theme from '../Themes/Theme';
 import { useState } from 'react';
 import { makePostRequest } from '../Utils/requests';
+import { useNavigate } from 'react-router-dom';
 
 export default function SignUp() {
     const [error, setError] = useState();
+    const nav = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -38,7 +40,13 @@ export default function SignUp() {
             return;
         }
         const res = await makePostRequest('http://localhost:3001/signup', user);
+        if (res.error){
+            setError(res.errorMessage);
+            return;
+        }
+        setError()  
         console.log(res);
+        nav('/portal')
     };
 
     return (

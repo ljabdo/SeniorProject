@@ -39,6 +39,15 @@ export const Home = () => {
                         Sign Up
                     </Button>
                 </div>
+                <div className="signUpButton">
+                    <Button
+                        variant='contained'
+                        size="large"
+                        onClick={() => nav('/portal')}
+                    >
+                            Log In
+                    </Button>
+                </div>
             </div>
         </div>
     );

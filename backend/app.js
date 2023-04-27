@@ -54,10 +54,21 @@ app.post('/signup', async (req, res) => {
             throw errorMessage('must include a valid email');
         }
 
-        res.send({ message: 'Successful account creation' });
+        user = await User.findOne({
+            email: data.email
+        })
+        if (user != null){
+            res.send(errorMessage('Email already registered with an account'));
+            throw errorMessage('Email already registered with an account');  
+        }
+        else{
+            res.send({ message: 'Successful account creation' });
+        }
+
     } catch (err) {
         console.log('signup error');
         console.log(err.errorMessage);
+        return
     }
 
     const hash = await createHash(data.password)
