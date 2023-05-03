@@ -43,7 +43,7 @@ export const Home = () => {
                     <Button
                         variant='contained'
                         size="large"
-                        onClick={() => nav('/portal')}
+                        onClick={() => nav('/login')}
                     >
                             Log In
                     </Button>
