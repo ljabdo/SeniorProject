@@ -18,15 +18,50 @@ app.get('/', (req, res) => {
 
 app.post('/login', async (req, res) => {
     console.log("user trying to log in")
-    
-    console.log(data.password)
+
+    let data
+    let user
+    try {
+        data = req.body
+        if (
+            !data.email || 
+            !data.password
+        ){
+            res.send(errorMessage("Cannot include null fields"))
+            throw errorMessage("Cannot include null fields")
+        }
+        else if (
+            user = await User.findOne({
+                email: data.email
+            })
+            == null){
+                res.send(errorMessage("No account registered with email"))
+                throw errorMessage("No account registered with email")
+            }
+        }
+    catch (err){
+        console.log("Login failure")
+        console.log(err.errorMessage)
+        return
+    }
+
     user = await User.findOne({
-        firstname: "lucas"
+        email: data.email
     })
     pword = user.password
-    console.log(pword)
     const comp = await validateHash(data.password, pword)
-    console.log(comp)
+
+    if (!comp){
+        res.send(errorMessage("Wrong password"))
+        console.log("Password wrong on login")
+        return
+    }
+    else{
+        //jwt stuff
+        console.log("successful")
+        res.send({message: 'Successful log in'})
+        
+    }
 })
 
 app.post('/signup', async (req, res) => {
