@@ -8,13 +8,15 @@ import { display } from '@mui/system';
 import pic from '../images/paperBackground.jpg';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
+import { SideBar } from '../Components/SideBar';
 
 export const Portal = () => {
     const nav = useNavigate();
 
     return (
         <div>
-            <h1>Portal page</h1>
+            <TopNav/>
+            <SideBar/>
         </div>
     );
 };

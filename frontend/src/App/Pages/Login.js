@@ -45,6 +45,8 @@ export default function Login() {
             }
             setAuth(res.token)
             localStorage.setItem('jwt', res.token)
+            nav('/')
+            return
         }
         catch(err){
             setError(err.errorMessage)

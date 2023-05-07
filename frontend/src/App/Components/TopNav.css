@@ -4,14 +4,14 @@
     display: block;
     background-color: white;
     box-shadow: 1px 1px;
-    margin-bottom: 3%;
+    margin-bottom: 0%;
 }
 
 .logo {
     width: 15%;
     font-size: 4vw;
     font-family: monospace;
-    background-color: darkgoldenrod;
+    background-color: #b8860b;
     text-align: center;
 }
 
@@ -21,6 +21,7 @@
     /* background-color: whitesmoke; */
     /* margin: auto; */
     overflow: hidden;
+    margin-top: 3%;
 }
 
 .topdiv {

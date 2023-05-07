@@ -3,6 +3,7 @@ import React, { useEffect, useState} from 'react'
 import SignUp from './Pages/SignUp';
 import { Home } from './Pages/Home';
 import { Portal } from './Pages/Portal';
+import { NotFound } from './Pages/NotFound'
 import Login from './Pages/Login'
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -19,10 +20,10 @@ function App() {
 
     useEffect(() => {
         setUser(parseJwt(accessToken))
-    }, [])
+    }, [accessToken])
 
     const loginRequired = (component) => {
-        return accessToken ? component : <Navigate to='/' />;
+        return accessToken ? component : <Navigate to='/login' />;
     };
 
     const loggedInRedirect = (component) => {
@@ -45,6 +46,8 @@ function App() {
                         <Route path="/signup" element={loggedInRedirect(<SignUp />)} />
                         <Route path="/portal" element={loginRequired(<Portal />)} />
                         <Route path="/login" element={loggedInRedirect(<Login />)} />
+                        <Route exact path="/404" element={<NotFound/>} />
+                        <Route path ='*' element = {<Navigate to='/404'/>} />
                     </Routes>
                 </BrowserRouter>
             </ThemeProvider>
@@ -55,6 +58,19 @@ function App() {
 function parseJwt(token) {
     if (!token)
         return null;
+    // const base64Url = token.split('.')[1];
+    // const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    // const jsonPayload = decodeURIComponent(
+    //     window
+    //         .atob(base64)
+    //         .split('')
+    //         .map(function (c) {
+    //             return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    //         })
+    //         .join('')
+    // );
+
+    // return JSON.parse(jsonPayload);
     var decoded = jwtDecode(token)
     return decoded
 }
