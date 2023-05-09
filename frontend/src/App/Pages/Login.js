@@ -45,7 +45,7 @@ export default function Login() {
             }
             setAuth(res.token)
             localStorage.setItem('jwt', res.token)
-            nav('/')
+            nav('/portal')
             return
         }
         catch(err){
@@ -116,7 +116,7 @@ export default function Login() {
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
                         >
-                            Sign Up
+                            Log In
                         </Button>
                     </Box>
                 </Box>

@@ -17,6 +17,10 @@ app.get('/', (req, res) => {
     res.send('Hello world!');
 });
 
+app.post('/portal/note', async (req, res) => {
+    console.log("New note")
+})
+
 app.post('/login', async (req, res) => {
     console.log("user trying to log in")
 
@@ -100,9 +104,6 @@ app.post('/signup', async (req, res) => {
             res.send(errorMessage('Email already registered with an account'));
             throw errorMessage('Email already registered with an account');  
         }
-        // else{
-        //     res.send({ message: 'Successful account creation' });
-        // }
 
     } catch (err) {
         console.log('signup error');

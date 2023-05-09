@@ -9,6 +9,8 @@ import pic from '../images/paperBackground.jpg';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 import { SideBar } from '../Components/SideBar';
+import { Notes } from '../Components/Notes'
+import '../Components/Notes.css'
 
 export const Portal = () => {
     const nav = useNavigate();
@@ -16,7 +18,10 @@ export const Portal = () => {
     return (
         <div>
             <TopNav/>
-            <SideBar/>
+            <div className='PortalBox'>
+                <SideBar/>
+                <Notes/>
+            </div>
         </div>
     );
 };
