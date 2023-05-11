@@ -4,6 +4,7 @@ const errorMessage = require('./Utils/returns.js');
 const bootstrapDB = require('./Database/db_init.js');
 const User = require('./Models/user.js')
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken')
 
 const app = express();
 app.use(cors());
@@ -15,6 +16,10 @@ bootstrapDB();
 app.get('/', (req, res) => {
     res.send('Hello world!');
 });
+
+app.post('/portal/note', async (req, res) => {
+    console.log("New note")
+})
 
 app.post('/login', async (req, res) => {
     console.log("user trying to log in")
@@ -56,12 +61,15 @@ app.post('/login', async (req, res) => {
         console.log("Password wrong on login")
         return
     }
-    else{
-        //jwt stuff
-        console.log("successful")
-        res.send({message: 'Successful log in'})
-        
-    }
+
+    const newToken = jwt.sign(
+        { user_id: user.user_id, email: user.email},
+        process.env.JWT_SECRET
+    )
+
+    //jwt stuff
+    console.log("successful")
+    res.send({token: newToken})
 })
 
 app.post('/signup', async (req, res) => {
@@ -96,9 +104,6 @@ app.post('/signup', async (req, res) => {
             res.send(errorMessage('Email already registered with an account'));
             throw errorMessage('Email already registered with an account');  
         }
-        else{
-            res.send({ message: 'Successful account creation' });
-        }
 
     } catch (err) {
         console.log('signup error');
@@ -112,9 +117,16 @@ app.post('/signup', async (req, res) => {
     const newUser = new User({
         firstname: data.firstname,
         lastname: data.lastname,
-        email: data.email,
-        password: hash
+        email: data.email.toLowerCase(),
+        password: hash,
     })
+
+    const newToken = jwt.sign(
+        { user_id: newUser.user_id, email: newUser.email},
+        process.env.JWT_SECRET
+    )
+
+    newUser.token = newToken
 
     const tUser = await newUser.save()
     console.log(tUser)
@@ -122,6 +134,7 @@ app.post('/signup', async (req, res) => {
     // const firstArticle = await User.findOne({});
     // console.log(firstArticle);
     console.log("User succesfully created")
+    res.send({ token: newToken });
 });
 
 app.listen(port, () => {

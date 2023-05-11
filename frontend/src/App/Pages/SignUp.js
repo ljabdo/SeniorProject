@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
+import { useContext, useState } from 'react';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -12,12 +13,13 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import theme from '../Themes/Theme';
-import { useState } from 'react';
 import { makePostRequest } from '../Utils/requests';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../App';
 
 export default function SignUp() {
     const [error, setError] = useState();
+    const { setAuth } = useContext(AuthContext)
     const nav = useNavigate();
 
     const handleSubmit = async (event) => {
@@ -39,14 +41,21 @@ export default function SignUp() {
             setError('Cannot include empty fields');
             return;
         }
-        const res = await makePostRequest('http://localhost:3001/signup', user);
-        if (res.error){
-            setError(res.errorMessage);
-            return;
+        try{
+            const res = await makePostRequest('http://localhost:3001/signup', user);
+            if (res.error){
+                setError(res.errorMessage);
+                return;
+            }
+            setAuth(res.token)
+            localStorage.setItem('jwt', res.token)
+        }      
+        catch(err){
+            setError(err.errorMessage)
+            console.log("error")
         }
         setError()  
-        console.log(res);
-        nav('/portal')
+        // nav('/portal')
     };
 
     return (
