@@ -3,6 +3,7 @@ const cors = require('cors');
 const errorMessage = require('./Utils/returns.js');
 const bootstrapDB = require('./Database/db_init.js');
 const User = require('./Models/user.js')
+const Note = require('./Models/note.js')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 
@@ -19,6 +20,26 @@ app.get('/', (req, res) => {
 
 app.post('/portal/note', async (req, res) => {
     console.log("New note")
+    let data
+    try{
+        data = req.body
+        console.log(data)
+    }
+    catch(err){
+        console.log(err.error)
+        return
+    }
+
+    const newNote = new Note({
+        email: data.user.email,
+        title: req.body.title,
+        text: req.body.text
+    })
+
+    const tNote = await newNote.save()
+    console.log(tNote)
+
+    //need to add error checking
 })
 
 app.post('/login', async (req, res) => {
@@ -63,7 +84,7 @@ app.post('/login', async (req, res) => {
     }
 
     const newToken = jwt.sign(
-        { user_id: user.user_id, email: user.email},
+        { user_id: user.user_id}, {email: user.email},
         process.env.JWT_SECRET
     )
 

@@ -32,6 +32,8 @@ export const Notes = () => {
             text: data.get('text'),
         }
 
+        note.user = user
+
         console.log(note)
         console.log(user)
 
