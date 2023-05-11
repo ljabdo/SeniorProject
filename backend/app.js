@@ -5,7 +5,7 @@ const bootstrapDB = require('./Database/db_init.js');
 const User = require('./Models/user.js')
 const Note = require('./Models/note.js')
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 
 const app = express();
 app.use(cors());
@@ -17,6 +17,35 @@ bootstrapDB();
 app.get('/', (req, res) => {
     res.send('Hello world!');
 });
+
+app.post('/portal/getnote', async (req, res) =>{
+    let notes
+    console.log("Notes being fetched")
+    let data
+    try{
+        console.log(req.body)
+        data = req.body
+        if (
+            !data.email
+        ){
+            res.send(errorMessage("Cannot include null fields"))
+            throw errorMessage("Cannot include null fields")
+        }
+
+        console.log("here") 
+        email = data.email
+        notes = await Note.find({ email })
+        res.send(notes) 
+    }
+    catch(err){
+        console.log("error occured")
+        console.log(err.errorMessage)
+        return
+    }
+    console.log(data.user)
+
+    console.log(notes)
+})
 
 app.post('/portal/note', async (req, res) => {
     console.log("New note")
