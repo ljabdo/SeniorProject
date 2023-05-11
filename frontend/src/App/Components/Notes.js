@@ -70,6 +70,7 @@ export const Notes = () => {
                     return
                 }
                 setNotes(res)
+                setNoteCount(res.length)
             }
             catch (err){
                 console.log(err.error)
@@ -77,7 +78,7 @@ export const Notes = () => {
             }
         }
         fetchNotes();
-    }, [])
+    }, [noteCount])
 
     const notesTest = notes.map((note, i) => (
         RegNote(note.title, note.text)

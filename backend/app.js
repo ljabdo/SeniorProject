@@ -68,6 +68,7 @@ app.post('/portal/note', async (req, res) => {
     const tNote = await newNote.save()
     console.log(tNote)
 
+    res.send({message: "success"})
     //need to add error checking
 })
 
