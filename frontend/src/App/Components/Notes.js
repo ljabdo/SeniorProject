@@ -1,13 +1,14 @@
 import './Notes.css'
 import Box from '@mui/material/Box'
 import './Portal.css'
-import { Grid } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import { useContext, useState , useEffect} from 'react';
 import { AuthContext } from '../App';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@mui/material"
 import { makePostRequest , makeGetRequest} from '../Utils/requests';
 import { TextField } from '@mui/material'
+import Plus from "../Assets/plus.svg"
 
 
 export const Notes = () => {
@@ -17,7 +18,12 @@ export const Notes = () => {
     const { user } = useContext(AuthContext)
     const [notes, setNotes] = useState([])
     const nav = useNavigate();
+    const [expanded, setExpanded] = useState(false)
     // const noteCount = 3
+
+    const handleExpand = () => {
+        setExpanded(true)
+    }
 
     const RegNote = (title, text) => {
 
@@ -25,20 +31,62 @@ export const Notes = () => {
             <div className='Note'>
                 <Box
                 >
-                    <h2>
+                    <Typography
+                        variant="h4"
+                        fontFamily="Garamond"
+                    >
                         {title}
-                    </h2>
-                    <p>
+                    </Typography>
+                    <Typography
+                        component="p"                
+                    >
                         {text}
-                    </p>
+                    </Typography>
                 </Box>
             </div>)
     }
 
     const AddNote = () => {
 
-        return (                
+        return (
             <div className='Note'>  
+                {!expanded && (
+                    <Button
+                    onClick={handleExpand}
+                    sx={{
+                        height: '100%'
+                    }}>
+                        <img 
+                            src = { Plus }
+                            style={{
+                                width: '75%',
+                            }}
+                            alt = "add note"
+                        ></img>
+                    </Button>
+                )}
+                {expanded && (
+                    <AddTestNote/>
+                )}
+            </div>)
+    }
+
+    // .note {
+    //     background-color: lightblue;
+    //     width: 200px;
+    //     height: 200px;
+    //     transition: all 0.3s ease;
+    //   }
+      
+    //   .note.expanded {
+    //     width: 100%;
+    //     height: 100vh;
+    //   }
+
+    const AddTestNote = () => {
+
+        return (                
+            <div className='BigNote'>  
                 <Box
                     component="form"
                     onSubmit={handleClick}
@@ -48,13 +96,22 @@ export const Notes = () => {
                     >
                     </TextField>
                     <TextField
+                        sx={{
+                            height: 100
+                        }}
                         name="text"
                     ></TextField>
                     <Button 
                         type="submit"
                         variant='contained'
+                        sx={{
+                            width: 1/5,
+                            display: 'block',
+                            fontSize: 15,
+                            mx: 'auto'
+                        }}
                     > 
-                        PRESS HERE FOR NEW NOTE
+                        Create Note
                     </Button>
                 </Box>
             </div>)
@@ -93,6 +150,7 @@ export const Notes = () => {
 
     const handleClick = async (event) => {
         event.preventDefault();
+        setExpanded(false)
         const data = new FormData(event.target)
         const note = {
             title: data.get('title'),
