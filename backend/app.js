@@ -18,6 +18,42 @@ app.get('/', (req, res) => {
     res.send('Hello world!');
 });
 
+app.post('/portal/deletenote', async (req, res) =>{
+    let data
+    let deleteNote
+    console.log("deleting note")
+    try{
+        console.log(req.body)
+        data = req.body
+        if (!data.title ||
+            !data.text ||
+            !data.id){
+                res.send(errorMessage("Cannot include empty note with no id"))
+                throw errorMessage("Cannot include null fields")
+            }
+            let id = data.id
+            try{
+                deleteNote = await Note.findById(id)
+                if (deleteNote.title.localeCompare(data.title) == 0){
+                    console.log("DELETING NOTE NOW")
+                }
+                deleteNote = await Note.findByIdAndDelete(deleteNote._id)
+                console.log("note deleted")
+                console.log(deleteNote)
+            }
+            catch(err){
+                console.log(err.error)
+                throw errorMessage("Database failure")
+            }
+            res.send( deleteNote )
+    }
+    catch(err){
+        console.log(err.errorMessage)
+        res.send("object not found")
+        return
+    }
+})
+
 app.post('/portal/getnote', async (req, res) =>{
     let notes
     console.log("Notes being fetched")
@@ -42,9 +78,9 @@ app.post('/portal/getnote', async (req, res) =>{
         console.log(err.errorMessage)
         return
     }
-    console.log(data.user)
+    // console.log(data.user)
 
-    console.log(notes)
+    // console.log(notes)
 })
 
 app.post('/portal/note', async (req, res) => {

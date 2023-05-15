@@ -26,9 +26,36 @@ export const Notes = () => {
         setExpanded(true)
     }
 
+    const handleDelete = async (title, text, id) => {
+
+        // const DeleteNote = async () => {
+            const note ={
+                title: title,
+                text: text,
+                id: id
+            }
+
+            try{
+                console.log("deleting")
+                const res = await makePostRequest('http://localhost:3001/portal/deletenote', note);
+                console.log(res)
+                if (res.error){
+                    console.log("error")
+                    return
+                }
+                setNoteCount(noteCount - 1)
+                //might have to fetch notes again here but check and see
+            }
+            catch (err){
+                console.log(err.error)
+                return
+            }
+        
+    }
+
     const RegNote = (title, text, id) => {
 
-        return (                
+        return (     
             <div className='Note'>
                 <Box
                  sx={{
@@ -59,7 +86,8 @@ export const Notes = () => {
                     </Typography>
                 </Box>
                 <Button
-                    onClick={handleExpand}
+                    // onClick={handleDelete(title, text, id)}
+                    onClick={() => handleDelete(title, text, id)}
                     style={{
                         width: "10%",
                         left: "77.5%",
@@ -77,7 +105,7 @@ export const Notes = () => {
                             }}
                             alt = "delete note"
                         ></img>
-                    </Button>
+                </Button>
             </div>)
     }
 
