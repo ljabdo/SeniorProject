@@ -9,6 +9,7 @@ import { Button } from "@mui/material"
 import { makePostRequest , makeGetRequest} from '../Utils/requests';
 import { TextField } from '@mui/material'
 import Plus from "../Assets/plus.svg"
+import Trash from "../Assets/trash.svg"
 
 
 export const Notes = () => {
@@ -25,24 +26,58 @@ export const Notes = () => {
         setExpanded(true)
     }
 
-    const RegNote = (title, text) => {
+    const RegNote = (title, text, id) => {
 
         return (                
             <div className='Note'>
                 <Box
+                 sx={{
+                    height: "80%"
+                 }}
                 >
                     <Typography
-                        variant="h4"
+                        variant="h5"
                         fontFamily="Garamond"
+                        overflow='hidden'
+                        style={{
+                            borderBottom: '1px solid #000',
+                            // whiteSpace: 'nowrap',
+                            // textOverflow: 'ellipsis',
+                        }}
                     >
                         {title}
                     </Typography>
                     <Typography
-                        component="p"                
+                        component="p"   
+                        style={{
+                            // whiteSpace: 'nowrap',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                        }}      
                     >
                         {text}
                     </Typography>
                 </Box>
+                <Button
+                    onClick={handleExpand}
+                    style={{
+                        width: "10%",
+                        left: "77.5%",
+                        // position: "relative",
+                        // bottom: "5%",
+                        // top: "0%",
+                        // left: "0%",
+                        // zIndex: "999"
+                    }}
+                    >
+                        <img 
+                            src = { Trash }
+                            style={{
+                                width: '75%',
+                            }}
+                            alt = "delete note"
+                        ></img>
+                    </Button>
             </div>)
     }
 
@@ -138,7 +173,7 @@ export const Notes = () => {
     }, [noteCount])
 
     const notesTest = notes.map((note, i) => (
-        RegNote(note.title, note.text)
+        RegNote(note.title, note.text, note._id)
     ))
 
     // const notesTest = Array.from({ length: notes }, (_, i) => (
