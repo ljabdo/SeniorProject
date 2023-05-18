@@ -98,7 +98,8 @@ app.post('/portal/note', async (req, res) => {
     const newNote = new Note({
         email: data.user.email,
         title: req.body.title,
-        text: req.body.text
+        text: req.body.text,
+        date: req.body.date
     })
 
     const tNote = await newNote.save()

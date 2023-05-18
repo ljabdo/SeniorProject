@@ -53,10 +53,19 @@ export const Notes = () => {
         
     }
 
-    const RegNote = (title, text, id) => {
+    const RegNote = (title, text, id, date) => {
 
+        const newDate = new Date(date)
+
+        const options = { year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' , 
+        };
+        const dateString = newDate.toLocaleString(undefined, options)
+          
         return (     
             <div className='Note'>
+
                 <Box
                  sx={{
                     height: "80%"
@@ -64,12 +73,11 @@ export const Notes = () => {
                 >
                     <Typography
                         variant="h5"
-                        fontFamily="Garamond"
+                        fontFamily="roboto"
                         overflow='hidden'
                         style={{
-                            borderBottom: '1px solid #000',
-                            // whiteSpace: 'nowrap',
-                            // textOverflow: 'ellipsis',
+                            paddingLeft: '5%',
+                            paddingTop: '5%',
                         }}
                     >
                         {title}
@@ -77,7 +85,8 @@ export const Notes = () => {
                     <Typography
                         component="p"   
                         style={{
-                            // whiteSpace: 'nowrap',
+                            paddingLeft: "5%",
+                            paddingTop: "5%",
                             overflow: 'hidden',
                             textOverflow: 'ellipsis',
                         }}      
@@ -85,27 +94,30 @@ export const Notes = () => {
                         {text}
                     </Typography>
                 </Box>
-                <Button
-                    // onClick={handleDelete(title, text, id)}
-                    onClick={() => handleDelete(title, text, id)}
-                    style={{
-                        width: "10%",
-                        left: "77.5%",
-                        // position: "relative",
-                        // bottom: "5%",
-                        // top: "0%",
-                        // left: "0%",
-                        // zIndex: "999"
-                    }}
-                    >
-                        <img 
-                            src = { Trash }
-                            style={{
-                                width: '75%',
-                            }}
-                            alt = "delete note"
-                        ></img>
-                </Button>
+                    <Box
+                    sx={{
+                        height: "20%",
+                        width: "70%",
+                        position: 'absolute',
+                        paddingLeft: "5%",
+                        paddingTop: "5%"
+                    }}>
+                        {dateString}
+                    </Box>
+                    <Button
+                        onClick={() => handleDelete(title, text, id)}
+                        style={{
+                            width: "10%",
+                            height: "10%",
+                            left: "75%",
+                            position: "absolute"
+                        }}
+                        >
+                            <img 
+                                src = { Trash }
+                                alt = "delete note"
+                            ></img>
+                    </Button>
             </div>)
     }
 
@@ -201,7 +213,7 @@ export const Notes = () => {
     }, [noteCount])
 
     const notesTest = notes.map((note, i) => (
-        RegNote(note.title, note.text, note._id)
+        RegNote(note.title, note.text, note._id, note.date)
     ))
 
     // const notesTest = Array.from({ length: notes }, (_, i) => (
@@ -215,9 +227,11 @@ export const Notes = () => {
         event.preventDefault();
         setExpanded(false)
         const data = new FormData(event.target)
+        const newDate = new Date()
         const note = {
             title: data.get('title'),
             text: data.get('text'),
+            date: newDate
         }
 
         note.user = user

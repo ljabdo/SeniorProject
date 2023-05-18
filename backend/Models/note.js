@@ -4,7 +4,8 @@ const { Schema, model } = mongoose;
 const noteSchema = new Schema({
     email: String,
     title: String,
-    text: String
+    text: String,
+    date: Date
 });
 
 const Note = model('Note', noteSchema, 'noteCollection');
