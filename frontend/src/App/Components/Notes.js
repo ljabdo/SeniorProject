@@ -4,7 +4,7 @@ import './Portal.css'
 import { Grid, Typography } from '@mui/material';
 import { useContext, useState , useEffect} from 'react';
 import { AuthContext } from '../App';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation} from 'react-router-dom';
 import { Button } from "@mui/material"
 import { makePostRequest , makeGetRequest} from '../Utils/requests';
 import { TextField } from '@mui/material'
@@ -20,6 +20,7 @@ export const Notes = () => {
     const [notes, setNotes] = useState([])
     const nav = useNavigate();
     const [expanded, setExpanded] = useState(false)
+    const location = useLocation()
     // const noteCount = 3
 
     const handleExpand = () => {
@@ -156,7 +157,7 @@ export const Notes = () => {
     //   .note.expanded {
     //     width: 100%;
     //     height: 100vh;
-    //   }
+    //   }  
 
     const AddTestNote = () => {
 
@@ -194,6 +195,7 @@ export const Notes = () => {
 
     useEffect(() =>{
         const fetchNotes = async () => {
+            console.log(user)
             try{
                 const res = await makePostRequest('http://localhost:3001/portal/getnote', user);
                 console.log(res)    
@@ -209,8 +211,10 @@ export const Notes = () => {
                 return
             }
         }
-        fetchNotes();
-    }, [noteCount])
+        if (user){
+            fetchNotes();
+        }
+    }, [noteCount, user])
 
     const notesTest = notes.map((note, i) => (
         RegNote(note.title, note.text, note._id, note.date)

@@ -70,7 +70,14 @@ app.post('/portal/getnote', async (req, res) =>{
 
         console.log("here") 
         email = data.email
-        notes = await Note.find({ email })
+        try{
+            notes = await Note.find({ email })
+            console.log("notes fetched")
+        }
+        catch(err){
+            console.log(err.error)
+            return
+        }
         res.send(notes) 
     }
     catch(err){
