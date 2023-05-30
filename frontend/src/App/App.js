@@ -13,7 +13,7 @@ import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 
 export const AuthContext = React.createContext();
 
-function App() {
+function App() { 
 
     const [accessToken, setAccessToken] = useState(localStorage.getItem('jwt'))
     const [user, setUser] = useState(null)

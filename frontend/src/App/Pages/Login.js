@@ -58,7 +58,7 @@ export default function Login() {
     };
 
     return (
-        <ThemeProvider theme={theme}>
+        // <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <Box
@@ -67,6 +67,7 @@ export default function Login() {
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
+                        // backgroundColor: 'wheat'
                     }}
                 >
                     <Typography component="h1" variant="h4">
@@ -114,13 +115,13 @@ export default function Login() {
                             type="submit"
                             fullWidth
                             variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
+                            sx={{ mt: 3, mb: 2 ,backgroundColor: '#CD533B'}}
                         >
                             Log In
                         </Button>
                     </Box>
                 </Box>
             </Container>
-        </ThemeProvider>
+        // </ThemeProvider>
     );
 }

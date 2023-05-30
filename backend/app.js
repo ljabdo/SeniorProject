@@ -25,8 +25,8 @@ app.post('/portal/deletenote', async (req, res) =>{
     try{
         console.log(req.body)
         data = req.body
-        if (!data.title ||
-            !data.text ||
+        if (!data.title &&
+            !data.text &&
             !data.id){
                 res.send(errorMessage("Cannot include empty note with no id"))
                 throw errorMessage("Cannot include null fields")
@@ -43,13 +43,12 @@ app.post('/portal/deletenote', async (req, res) =>{
             }
             catch(err){
                 console.log(err.error)
-                throw errorMessage("Database failure")
+                return
             }
             res.send( deleteNote )
     }
     catch(err){
         console.log(err.errorMessage)
-        res.send("object not found")
         return
     }
 })

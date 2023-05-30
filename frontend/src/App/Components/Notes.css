@@ -30,12 +30,12 @@
 .BigNote{
     position: fixed;
     background-color: white;
-    top: 19%;
+    top: 18%;
     left: 17.5%;
     color: black;
     height: 67.5%;
     width: 77.5%;
-    border-radius: 3px;
+    border-radius: 1px;
     animation-name: scaleAnimation;
     animation-duration: 1s;
     animation-timing-function: ease-in-out;
@@ -61,7 +61,7 @@
     }
     100% {
         width: 77.5%;
-        height: 67.5%;
+        height: 68.5%;
       /* transform: scale(1);
       bottom: auto;
       right: auto;

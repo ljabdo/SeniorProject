@@ -13,18 +13,17 @@ div {
 
 body,
 html {
-    /* background: #4cb8c4; fallback for old browsers
+    background:wheat;
     background: -webkit-linear-gradient(
         to top,
-        #3cd3ad,
-        #4cb8c4
-    ); Chrome 10-25, Safari 5.1-6
+        wheat,
+        wheat
+    );
     background: linear-gradient(
         to top,
-        #3cd3ad,
-        #4cb8c4
-    ); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background:wheat;
+        wheat,
+        wheat
+    );
     width: 100%;
     height: 100%;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
