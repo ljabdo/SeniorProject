@@ -6,7 +6,7 @@
 }
 
 .NoteBox{
-    background-color: red;
+    background-color: #E88D67;
     height: 87%;
     width: 82.5%;
     margin-left: 2.5%;
@@ -16,7 +16,7 @@
 }
 
 .Note{
-    background-color: white;
+    background-color: whitesmoke;
     color: black;
     height: 45%;
     width: 18%;

@@ -33,7 +33,9 @@ export const Home = () => {
                     <Button
                         variant="contained"
                         size="large"
-                        // color="success"
+                        sx={{
+                            backgroundColor: '#CD533B'
+                        }}
                         onClick={() => nav('/signup')}
                     >
                         Sign Up
@@ -41,6 +43,9 @@ export const Home = () => {
                 </div>
                 <div className="signUpButton">
                     <Button
+                        sx={{
+                            backgroundColor: '#2E0219'
+                        }}
                         variant='contained'
                         size="large"
                         onClick={() => nav('/login')}
