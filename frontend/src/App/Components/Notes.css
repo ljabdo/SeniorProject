@@ -30,7 +30,7 @@
 .BigNote{
     position: fixed;
     background-color: white;
-    top: 18%;
+    top: 17%;
     left: 17.5%;
     color: black;
     height: 67.5%;
@@ -61,7 +61,7 @@
     }
     100% {
         width: 77.5%;
-        height: 68.5%;
+        height: 72.5%;
       /* transform: scale(1);
       bottom: auto;
       right: auto;

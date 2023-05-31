@@ -21,10 +21,47 @@ export const Notes = () => {
     const nav = useNavigate();
     const [expanded, setExpanded] = useState(false)
     const location = useLocation()
+    const [editNote, setEditNote] = useState(false)
+    const [anim, setAnim] = useState(false)
     // const noteCount = 3
 
     const handleExpand = () => {
         setExpanded(true)
+    }
+
+    const handleEditNote = (id) => {
+        setEditNote(id)
+        console.log("BUTTON PRESSED")
+        console.log(id)
+    }
+
+
+    const handleEditNoteClick = async (event) => {
+        event.preventDefault()
+        setEditNote(false)
+
+        const data = new FormData(event.target)
+        const note = {
+            title: data.get('title'),
+            text: data.get('text'),
+            id: editNote.id
+        }
+
+
+        try{
+            const res = await makePostRequest('http://localhost:3001/portal/edit',
+             note);
+            if (res.error){
+                console.log(res.errorMessage)
+                console.log('error on editing note')
+                return;
+            }
+        }
+        catch(err){
+            console.log("error on posting note")
+            return
+        }
+        setNoteCount(noteCount + 1) //To force refresh of notes fetch
     }
 
     const handleDelete = async (title, text, id) => {
@@ -56,6 +93,13 @@ export const Notes = () => {
 
     const RegNote = (title, text, id, date) => {
 
+        const note ={
+            title: title,
+            text: text,
+            date: date,
+            id: id
+        }
+
         const newDate = new Date(date)
 
         const options = { year: 'numeric', 
@@ -69,9 +113,12 @@ export const Notes = () => {
 
                 <Box
                  sx={{
-                    height: "80%"
+                    height: "80%",
+                    '&:hover': {
+                        cursor: 'grab',
+                    },
                  }}
-                >
+                 onClick={() => handleEditNote(note)}>
                     <Typography
                         variant="h5"
                         fontFamily="roboto"
@@ -144,6 +191,9 @@ export const Notes = () => {
                 {expanded && (
                     <AddTestNote/>
                 )}
+                {editNote && (
+                    <AddEditNote/>
+                )}
             </div>)
     }
 
@@ -158,6 +208,42 @@ export const Notes = () => {
     //     width: 100%;
     //     height: 100vh;
     //   }  
+
+    const AddEditNote = () => {
+
+        return (                
+            <div className='BigNote'>  
+                <Box
+                    component="form"
+                    onSubmit={handleEditNoteClick}
+                >
+                    <TextField
+                        name="title"
+                        defaultValue={editNote.title}
+                    >
+                    </TextField>
+                    <TextField
+                        sx={{
+                            height: 100
+                        }}
+                        defaultValue={editNote.text}
+                        name="text"
+                    ></TextField>
+                    <Button 
+                        type="submit"
+                        variant='contained'
+                        sx={{
+                            width: 1/5,
+                            display: 'block',
+                            fontSize: 15,
+                            mx: 'auto'
+                        }}
+                    > 
+                        Edit Note
+                    </Button>
+                </Box>
+            </div>)
+    }
 
     const AddTestNote = () => {
 

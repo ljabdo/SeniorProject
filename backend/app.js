@@ -18,6 +18,47 @@ app.get('/', (req, res) => {
     res.send('Hello world!');
 });
 
+app.post('/portal/edit', async (req, res) => {
+    let data
+    let editNote
+    console.log("editing note")
+    try{
+        console.log(req.body)
+        data = req.body
+        if (!data.title &&
+            !data.text &&
+            !data.id){
+                res.send(errorMessage("Cannot include empty note with no id"))
+                throw errorMessage("Cannot include null fields")
+            }
+            let id = data.id
+            try{
+                editNote = await Note.findById(id)
+                if (editNote){
+                    console.log("editing")
+                    editNote.title = data.title
+                    editNote.text = data.text
+                }
+                else{
+                    console.log("error")
+                    res.send(errorMessage("Note cannot be edited"))
+                    throw errorMessage("Note editing error")
+                }
+
+                editNote.save()
+                res.send({message: "edit success"})
+            }
+            catch(err){
+                console.log(err.error)
+                return
+            }
+    }
+    catch(err){
+        console.log(err.errorMessage)
+        return
+    }
+})
+
 app.post('/portal/deletenote', async (req, res) =>{
     let data
     let deleteNote
