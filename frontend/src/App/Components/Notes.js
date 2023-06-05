@@ -117,6 +117,7 @@ export const Notes = () => {
                     '&:hover': {
                         cursor: 'grab',
                     },
+                    overflow: "hidden",
                  }}
                  onClick={() => handleEditNote(note)}>
                     <Typography
@@ -289,7 +290,8 @@ export const Notes = () => {
                     console.log("error")
                     return
                 }
-                setNotes(res)
+                res.sort((a, b) => (new Date(b.date) - new Date(a.date)))
+                setNotes(res) 
                 setNoteCount(res.length)
             }
             catch (err){
@@ -350,10 +352,14 @@ export const Notes = () => {
 
     return (
         <div className='NoteBox'>
-            <div style={{ display: 'flex', flexDirection: 'row', gap: '2.5%', flexWrap: 'wrap'}}>
+            <div style={{ display: 'flex',
+                flexDirection: 'row',
+                gap: '2.5%',
+                flexWrap: 'wrap',
+                overflow: "auto"}}>
                 {/* {notesTest} */}
-                { notesTest }
                 <AddNote/>
+                { notesTest }
             </div>
         </div>
     )

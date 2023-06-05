@@ -113,12 +113,13 @@ app.post('/portal/getnote', async (req, res) =>{
         try{
             notes = await Note.find({ email })
             console.log("notes fetched")
+            console.log(notes)
         }
         catch(err){
             console.log(err.error)
             return
         }
-        res.send(notes) 
+        res.send(notes)
     }
     catch(err){
         console.log("error occured")
