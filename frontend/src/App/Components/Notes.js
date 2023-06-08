@@ -381,15 +381,17 @@ export const Notes = () => {
                         width: "30%",
                         top: 0,
                         padding: 0,
+                        overflow: "hidden",
+                        backgroundColor: ""
                     }}
                     label="Search"
-                    variant="outlined"
+                    variant="filled"
                     value={searchQuery}
                     onChange={handleSearchQuery}
                 />
                 <img 
                     style={{
-                        height: "75%"
+                        height: "75%",
                     }}
                     src={Search} alt='Home'/>
             </div>
