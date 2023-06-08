@@ -20,7 +20,15 @@ export const Portal = () => {
             <TopNav/>
             <div className='PortalBox'>
                 <SideBar/>
+                {/* <Notes/> */}
+                {/* <div style={{
+                    display: 'flex',
+                    alignItems: 'vertical',
+                    width: '100%',
+                }}>
+                    <p>Test</p> */}
                 <Notes/>
+                {/* </div> */}
             </div>
         </div>
     );

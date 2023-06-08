@@ -90,6 +90,7 @@ export const SideBar = () => {
                     <img src={LogoutIcon} alt='Logout' />
                 )}
             </Grid>
+
             <div
                 style={{
                     flex: 0,

@@ -8,6 +8,7 @@ import { useNavigate, useLocation} from 'react-router-dom';
 import { Button } from "@mui/material"
 import { makePostRequest , makeGetRequest} from '../Utils/requests';
 import { TextField } from '@mui/material'
+import { SideBar } from '../Components/SideBar';
 import Plus from "../Assets/plus.svg"
 import Trash from "../Assets/trash.svg"
 
@@ -348,10 +349,15 @@ export const Notes = () => {
         setNoteCount(noteCount + 1)
     }
 
-
-
     return (
-        <div className='NoteBox'>
+        <div 
+        className='NoteBox'
+        style={{
+            display: 'flex',
+            flexDirection: 'column'
+        }}>
+            <div className='SearchBar'>
+            </div>
             <div style={{ display: 'flex',
                 flexDirection: 'row',
                 gap: '2.5%',
