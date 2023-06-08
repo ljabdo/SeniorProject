@@ -11,6 +11,7 @@ import { TextField } from '@mui/material'
 import { SideBar } from '../Components/SideBar';
 import Plus from "../Assets/plus.svg"
 import Trash from "../Assets/trash.svg"
+import Search from "../Assets/search-icon.svg"
 
 
 export const Notes = () => {
@@ -24,6 +25,8 @@ export const Notes = () => {
     const location = useLocation()
     const [editNote, setEditNote] = useState(false)
     const [anim, setAnim] = useState(false)
+    const [searchQuery, setSearchQuery] = useState('');
+
     // const noteCount = 3
 
     const handleExpand = () => {
@@ -34,6 +37,10 @@ export const Notes = () => {
         setEditNote(id)
         console.log("BUTTON PRESSED")
         console.log(id)
+    }
+
+    const handleSearchQuery = (event) => {
+        setSearchQuery(event.target.value)
     }
 
 
@@ -291,9 +298,20 @@ export const Notes = () => {
                     console.log("error")
                     return
                 }
-                res.sort((a, b) => (new Date(b.date) - new Date(a.date)))
-                setNotes(res) 
-                setNoteCount(res.length)
+                if (searchQuery === ""){
+                    res.sort((a, b) => (new Date(b.date) - new Date(a.date)))
+                    setNotes(res) 
+                    setNoteCount(res.length)
+                }
+                else{
+                    console.log(searchQuery)
+                    const filtered = res.filter(
+                        (note) => {return note.title.includes(searchQuery) || note.text.includes(searchQuery)})
+                        setNotes(filtered) 
+                        setNoteCount(filtered.length)
+                }
+                console.log(res)
+
             }
             catch (err){
                 console.log(err.error)
@@ -303,7 +321,7 @@ export const Notes = () => {
         if (user){
             fetchNotes();
         }
-    }, [noteCount, user])
+    }, [noteCount, user, searchQuery])
 
     const notesTest = notes.map((note, i) => (
         RegNote(note.title, note.text, note._id, note.date)
@@ -357,6 +375,23 @@ export const Notes = () => {
             flexDirection: 'column'
         }}>
             <div className='SearchBar'>
+                <TextField
+                    sx={{
+                        height: 50,
+                        width: "30%",
+                        top: 0,
+                        padding: 0,
+                    }}
+                    label="Search"
+                    variant="outlined"
+                    value={searchQuery}
+                    onChange={handleSearchQuery}
+                />
+                <img 
+                    style={{
+                        height: "75%"
+                    }}
+                    src={Search} alt='Home'/>
             </div>
             <div style={{ display: 'flex',
                 flexDirection: 'row',

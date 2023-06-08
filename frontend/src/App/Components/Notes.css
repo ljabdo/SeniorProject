@@ -12,20 +12,23 @@
     margin-left: 2.5%;
     justify-content: center;
     border-radius: 10px;
-    padding: 2%;
+    padding: 1%;
 }
 
 .SearchBar{
   /* background-color: #E88D67; */
-  background-color: #2E0219;
-  height: 5%;
+  /* background-color: #2E0219; */
+    background-color:aquamarine;
+  height: 7.5%;
   width: 100%;
+  display: flex;
+  align-items: center;
   /* margin-left: 2.5%; */
   margin: auto;
   /* justify-content: center; */
   border-radius: 10px;
-  padding: 2.5%;
-  margin-bottom: 2.5%;
+  /* padding: 2.5%; */
+  margin-bottom: 1%;
 }
 
 .Note{
