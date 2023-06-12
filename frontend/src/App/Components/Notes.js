@@ -12,6 +12,9 @@ import { SideBar } from '../Components/SideBar';
 import Plus from "../Assets/plus.svg"
 import Trash from "../Assets/trash.svg"
 import Search from "../Assets/search-icon.svg"
+import Switch from '@mui/material/Switch';
+import { Fragment } from 'react';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 
 export const Notes = () => {
@@ -26,11 +29,21 @@ export const Notes = () => {
     const [editNote, setEditNote] = useState(false)
     const [anim, setAnim] = useState(false)
     const [searchQuery, setSearchQuery] = useState('');
+    const [checked, setChecked] = useState(false);
 
     // const noteCount = 3
 
+    const label = { inputProps: { 'aria-label': 'Size switch demo' } };
+
     const handleExpand = () => {
         setExpanded(true)
+    }
+
+    const handleSetChecked = () => {
+        if (checked)
+            setChecked(false)
+        else   
+            setChecked(true)
     }
 
     const handleEditNote = (id) => {
@@ -367,6 +380,7 @@ export const Notes = () => {
         setNoteCount(noteCount + 1)
     }
 
+
     return (
         <div 
         className='NoteBox'
@@ -375,25 +389,45 @@ export const Notes = () => {
             flexDirection: 'column'
         }}>
             <div className='SearchBar'>
-                <TextField
-                    sx={{
-                        height: 50,
-                        width: "30%",
-                        top: 0,
-                        padding: 0,
-                        overflow: "hidden",
-                        backgroundColor: ""
-                    }}
-                    label="Search"
-                    variant="filled"
-                    value={searchQuery}
-                    onChange={handleSearchQuery}
-                />
-                <img 
-                    style={{
-                        height: "75%",
-                    }}
-                    src={Search} alt='Home'/>
+                <div
+                style={{
+                    width: "50%"
+                }}>
+                    <TextField
+                        sx={{
+                            height: 50,
+                            width: "50%",
+                            top: 0,
+                            padding: 0,
+                            overflow: "hidden",
+                            backgroundColor: "",
+                        }}
+                        label="Search"
+                        variant="filled"
+                        value={searchQuery}
+                        onChange={handleSearchQuery}
+                    />
+                    <img 
+                        style={{
+                            height: "75%",
+                        }}
+                        src={Search} alt='Search'/>
+                </div>
+                <div
+                style={{width: "25%", display: 'flex'}}>
+                    <p
+                        style={{textAlign: 'center'}}
+                    >Sort by date</p>
+                    <FormControlLabel 
+                        control={
+                            <Switch 
+                                defaultChecked 
+                                checked={checked}
+                                onChange={handleSetChecked}
+                            />}
+                    />
+                    <p>Sort by size</p>
+                </div>
             </div>
             <div style={{ display: 'flex',
                 flexDirection: 'row',
