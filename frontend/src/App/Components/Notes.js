@@ -311,12 +311,20 @@ export const Notes = () => {
                     console.log("error")
                     return
                 }
-                if (searchQuery === ""){
+
+                if (!checked){
                     res.sort((a, b) => (new Date(b.date) - new Date(a.date)))
                     setNotes(res) 
                     setNoteCount(res.length)
                 }
-                else{
+                if (checked){
+                    res.sort((a, b) => (b.text.length - a.text.length))
+                    setNotes(res) 
+                    setNoteCount(res.length)
+                }
+
+                if (searchQuery !== "")
+                {
                     console.log(searchQuery)
                     const filtered = res.filter(
                         (note) => {return note.title.includes(searchQuery) || note.text.includes(searchQuery)})
@@ -334,7 +342,7 @@ export const Notes = () => {
         if (user){
             fetchNotes();
         }
-    }, [noteCount, user, searchQuery])
+    }, [noteCount, user, searchQuery, checked])
 
     const notesTest = notes.map((note, i) => (
         RegNote(note.title, note.text, note._id, note.date)
