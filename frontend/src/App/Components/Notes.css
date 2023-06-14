@@ -61,6 +61,13 @@
     z-index: 999;
 }
 
+.centered{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
 /* @keyframes scaleAnimation {
     0% {
       transform: scale(0);
@@ -80,7 +87,7 @@
     }
     100% {
         width: 80.5%;
-        height: 72.5%;
+        height: 76.5%;
       /* transform: scale(1);
       bottom: auto;
       right: auto;

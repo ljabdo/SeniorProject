@@ -415,9 +415,15 @@ export const Notes = () => {
                 </div>
                 <div
                 style={{width: "25%", display: 'flex'}}>
-                    <p
-                        style={{textAlign: 'center'}}
-                    >Sort by date</p>
+                    <div className='centered'>
+                        <Typography
+                            style={{
+                                textAlign: "center"
+                            }}
+                            >
+                                Sort by date
+                        </Typography>
+                    </div>
                     <FormControlLabel 
                         control={
                             <Switch 
@@ -426,7 +432,15 @@ export const Notes = () => {
                                 onChange={handleSetChecked}
                             />}
                     />
-                    <p>Sort by size</p>
+                    <div className='centered'>
+                        <Typography
+                            style={{
+                                textAlign: "center"
+                            }}
+                            >
+                                Sort by size
+                        </Typography>
+                    </div>
                 </div>
             </div>
             <div style={{ display: 'flex',
