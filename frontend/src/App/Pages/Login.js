@@ -19,7 +19,7 @@ import { AuthContext } from '../App';
 
 export default function Login() {
     const [error, setError] = useState();
-    const { setAuth } = useContext(AuthContext)
+    const { setAuth } = useContext(AuthContext);
     const nav = useNavigate();
 
     const handleSubmit = async (event) => {
@@ -27,101 +27,96 @@ export default function Login() {
         const data = new FormData(event.currentTarget);
         const user = {
             email: data.get('email'),
-            password: data.get('password')
+            password: data.get('password'),
         };
 
-        if (
-            !user.email ||
-            !user.password
-        ) {
+        if (!user.email || !user.password) {
             setError('Cannot include empty fields');
             return;
         }
-        try{
-            const res = await makePostRequest('http://localhost:3001/login', user);
-            if (res.error){
+        try {
+            const res = await makePostRequest(
+                'http://localhost:3001/login',
+                user
+            );
+            if (res.error) {
                 setError(res.errorMessage);
                 return;
             }
-            setAuth(res.token)
-            localStorage.setItem('jwt', res.token)
-            nav('/portal')
-            return
+            setAuth(res.token);
+            localStorage.setItem('jwt', res.token);
+            nav('/portal');
+            return;
+        } catch (err) {
+            setError(err.errorMessage);
+            console.log('error');
         }
-        catch(err){
-            setError(err.errorMessage)
-            console.log("error")
-        }
-        setError()
-        
+        setError();
+
         // nav('/portal')
     };
 
     return (
         // <ThemeProvider theme={theme}>
-            <Container component="main" maxWidth="xs">
-                <CssBaseline />
+        <Container component="main" maxWidth="xs">
+            <CssBaseline />
+            <Box
+                sx={{
+                    marginTop: 8,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    // backgroundColor: 'wheat'
+                }}
+            >
+                <Typography component="h1" variant="h4">
+                    Log In
+                </Typography>
                 <Box
-                    sx={{
-                        marginTop: 8,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        // backgroundColor: 'wheat'
-                    }}
+                    component="form"
+                    noValidate
+                    onSubmit={handleSubmit}
+                    sx={{ mt: 3 }}
                 >
-                    <Typography component="h1" variant="h4">
-                        Log In
-                    </Typography>
-                    <Box
-                        component="form"
-                        noValidate
-                        onSubmit={handleSubmit}
-                        sx={{ mt: 3 }}
-                    >
-                        <Grid container spacing={2}>
-                            <Grid item xs={12}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    id="email"
-                                    label="Email Address"
-                                    name="email"
-                                    autoComplete="email"
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    name="password"
-                                    label="Password"
-                                    type="password"
-                                    id="password"
-                                    autoComplete="new-password"
-                                />
-                            </Grid>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12}>
+                            <TextField
+                                required
+                                fullWidth
+                                id="email"
+                                label="Email Address"
+                                name="email"
+                                autoComplete="email"
+                            />
                         </Grid>
-                        {error && (
-                            <Typography
-                                variant="h5"
-                                sx={{ mt: 2 }}
-                                color="#EC4622"
-                            >
-                                Error: {error}
-                            </Typography>
-                        )}
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2 ,backgroundColor: '#CD533B'}}
-                        >
-                            Log In
-                        </Button>
-                    </Box>
+                        <Grid item xs={12}>
+                            <TextField
+                                required
+                                fullWidth
+                                name="password"
+                                label="Password"
+                                type="password"
+                                id="password"
+                                autoComplete="new-password"
+                            />
+                        </Grid>
+                    </Grid>
+                    {error && (
+                        <Typography variant="h5" sx={{ mt: 2 }} color="#EC4622">
+                            Error: {error}
+                        </Typography>
+                    )}
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2, backgroundColor: '#CD533B' }}
+                    >
+                        Log In
+                    </Button>
                 </Box>
-            </Container>
+            </Box>
+        </Container>
         // </ThemeProvider>
     );
 }

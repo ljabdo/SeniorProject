@@ -1,5 +1,5 @@
-import Box from '@mui/material/Box'
-import './Portal.css'
+import Box from '@mui/material/Box';
+import './Portal.css';
 import { Grid } from '@mui/material';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../App';
@@ -12,7 +12,6 @@ import ProfileFilledIcon from '../Assets/filled_profile.svg';
 import Home from '../Assets/home.svg';
 
 export const SideBar = () => {
-
     const [hoverLogout, setHoverLogout] = useState(false);
     const [hoverProfile, setHoverProfile] = useState(false);
     const { setAuth, user } = useContext(AuthContext);
@@ -32,26 +31,25 @@ export const SideBar = () => {
         nav('/');
     };
 
-    return(
+    return (
         <div className="SideBar">
-             <Grid 
-                container
+            <Grid container>
+                <Grid
+                    item
+                    style={{
+                        height: '10%',
+                        width: '100%',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}
+                    onClick={handleHome}
                 >
-             <Grid item
-                style={{
-                    height: "10%",
-                    width: "100%",
-                    cursor: 'pointer',
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center"
-                }}
-                onClick={handleHome}
-            >
-                <img src={Home} alt='Home'/>
-            </Grid>
+                    <img src={Home} alt="Home" />
+                </Grid>
 
-            {/* <Grid item
+                {/* <Grid item
                 onClick={handleProfile}
                 style={{
                     height: "10%",
@@ -71,32 +69,33 @@ export const SideBar = () => {
                 )}
             </Grid> */}
 
-            <Grid item
-                onClick={handleLogout}
-                style={{    
-                    height: "10%",
-                    width: "100%",
-                    cursor: 'pointer',
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center"
-                }}
-                onMouseOver={() => setHoverLogout(true)}
-                onMouseLeave={() => setHoverLogout(false)}
-            >
-                {!hoverLogout ? (
-                    <img src={LogoutClosedIcon} alt='Logout' />
-                ) : (
-                    <img src={LogoutIcon} alt='Logout' />
-                )}
-            </Grid>
+                <Grid
+                    item
+                    onClick={handleLogout}
+                    style={{
+                        height: '10%',
+                        width: '100%',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}
+                    onMouseOver={() => setHoverLogout(true)}
+                    onMouseLeave={() => setHoverLogout(false)}
+                >
+                    {!hoverLogout ? (
+                        <img src={LogoutClosedIcon} alt="Logout" />
+                    ) : (
+                        <img src={LogoutIcon} alt="Logout" />
+                    )}
+                </Grid>
 
-            <div
-                style={{
-                    flex: 0,
-                }}
-            />
-        </Grid>
-    </div>
-    )
-}
+                <div
+                    style={{
+                        flex: 0,
+                    }}
+                />
+            </Grid>
+        </div>
+    );
+};

@@ -19,7 +19,7 @@ import { AuthContext } from '../App';
 
 export default function SignUp() {
     const [error, setError] = useState();
-    const { setAuth } = useContext(AuthContext);
+    const { setAuth } = useContext(AuthContext)
     const nav = useNavigate();
 
     const handleSubmit = async (event) => {
@@ -41,23 +41,20 @@ export default function SignUp() {
             setError('Cannot include empty fields');
             return;
         }
-        try {
-            const res = await makePostRequest(
-                'http://localhost:3001/signup',
-                user
-            );
-            if (res.error) {
+        try{
+            const res = await makePostRequest('http://localhost:3001/signup', user);
+            if (res.error){
                 setError(res.errorMessage);
                 return;
             }
-            setAuth(res.token);
-            localStorage.setItem('jwt', res.token);
-        } catch (err) {
-            setError(err.errorMessage);
-            console.log('error');
+            setAuth(res.token)
+            localStorage.setItem('jwt', res.token)
+        }      
+        catch(err){
+            setError(err.errorMessage)
+            console.log("error")
         }
-        setError();
-        // nav('/portal')
+        setError()  
     };
 
     return (
@@ -138,20 +135,14 @@ export default function SignUp() {
                             type="submit"
                             fullWidth
                             variant="contained"
-                            sx={{ mt: 3, mb: 2, backgroundColor: '#CD533B' }}
+                            sx={{ mt: 3, mb: 2, backgroundColor: '#CD533B'}}
                         >
                             Sign Up
                         </Button>
                         <Grid container justifyContent="flex-end">
-                            {/* <Grid item>
-                <Link href="#" variant="body2">
-                  Already have an account? Sign in
-                </Link>
-              </Grid> */}
                         </Grid>
                     </Box>
                 </Box>
-                {/* <Copyright sx={{ mt: 5 }} /> */}
             </Container>
         </ThemeProvider>
     );

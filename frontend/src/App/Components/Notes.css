@@ -1,12 +1,12 @@
-.PortalBox{
+.PortalBox {
     display: flex;
     align-items: center;
     height: 92.5%;
     width: 100%;
 }
 
-.NoteBox{
-    background-color: #E88D67;
+.NoteBox {
+    background-color: #e88d67;
     height: 87%;
     width: 82.5%;
     margin-left: 2.5%;
@@ -15,25 +15,25 @@
     padding: 1%;
 }
 
-.SearchBar{
-  /* background-color: #E88D69; */
-  background-color: whitesmoke;
-  /* background-color: #2E0219; */
+.SearchBar {
+    /* background-color: #E88D69; */
+    background-color: whitesmoke;
+    /* background-color: #2E0219; */
     /* background-color:aquamarine; */
-  height: 7.5%;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  /* margin-left: 2.5%; */
-  margin: auto;
-  /* justify-content: center; */
-  border-radius: 10px;
-  /* padding: 2.5%; */
-  margin-bottom: 1%;
-  /* justify-content: space-around; */
+    height: 7.5%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    /* margin-left: 2.5%; */
+    margin: auto;
+    /* justify-content: center; */
+    border-radius: 10px;
+    /* padding: 2.5%; */
+    margin-bottom: 1%;
+    /* justify-content: space-around; */
 }
 
-.Note{
+.Note {
     background-color: whitesmoke;
     color: black;
     height: 45%;
@@ -45,7 +45,7 @@
     /* text-overflow: ellipsis; */
 }
 
-.BigNote{
+.BigNote {
     position: fixed;
     background-color: white;
     top: 15.5%;
@@ -61,11 +61,11 @@
     z-index: 999;
 }
 
-.centered{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
+.centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 }
 
 /* @keyframes scaleAnimation {
@@ -77,21 +77,21 @@
     }
   } */
 
-  @keyframes scaleAnimation {
+@keyframes scaleAnimation {
     0% {
-      /* transform: scale(0); */
-      /* bottom: 0; */
-      /* right: 0; */
-      width: 0%;
-      height: 0%;
+        /* transform: scale(0); */
+        /* bottom: 0; */
+        /* right: 0; */
+        width: 0%;
+        height: 0%;
     }
     100% {
         width: 80.5%;
         height: 76.5%;
-      /* transform: scale(1);
+        /* transform: scale(1);
       bottom: auto;
       right: auto;
       top: 0;
       left: 0; */
     }
-  }
+}

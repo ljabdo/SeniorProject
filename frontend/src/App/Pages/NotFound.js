@@ -21,7 +21,7 @@ export const NotFound = () => {
                     my: 2,
                     display: 'flex',
                     flexDirection: 'column',
-                    height: '50vh'
+                    height: '50vh',
                 }}
             >
                 <Typography color={'#D17A22'} fontSize={22}>

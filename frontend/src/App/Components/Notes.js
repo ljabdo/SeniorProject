@@ -31,10 +31,6 @@ export const Notes = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [checked, setChecked] = useState(false);
 
-    // const noteCount = 3
-
-    const label = { inputProps: { 'aria-label': 'Size switch demo' } };
-
     const handleExpand = () => {
         setExpanded(true)
     }
@@ -82,12 +78,10 @@ export const Notes = () => {
             console.log("error on posting note")
             return
         }
-        setNoteCount(noteCount + 1) //To force refresh of notes fetch
+        setNoteCount(noteCount + 1)
     }
 
     const handleDelete = async (title, text, id) => {
-
-        // const DeleteNote = async () => {
             const note ={
                 title: title,
                 text: text,
@@ -103,7 +97,6 @@ export const Notes = () => {
                     return
                 }
                 setNoteCount(noteCount - 1)
-                //might have to fetch notes again here but check and see
             }
             catch (err){
                 console.log(err.error)
@@ -219,17 +212,6 @@ export const Notes = () => {
             </div>)
     }
 
-    // .note {
-    //     background-color: lightblue;
-    //     width: 200px;
-    //     height: 200px;
-    //     transition: all 0.3s ease;
-    //   }
-      
-    //   .note.expanded {
-    //     width: 100%;
-    //     height: 100vh;
-    //   }  
 
     const AddEditNote = () => {
 
@@ -348,13 +330,6 @@ export const Notes = () => {
         RegNote(note.title, note.text, note._id, note.date)
     ))
 
-    // const notesTest = Array.from({ length: notes }, (_, i) => (
-    //     <div key={i} className='Note'>
-    //         Box {i + 1}
-    //     </div>
-    // ))
-
-
     const handleClick = async (event) => {
         event.preventDefault();
         setExpanded(false)
@@ -456,7 +431,6 @@ export const Notes = () => {
                 gap: '2.5%',
                 flexWrap: 'wrap',
                 overflow: "auto"}}>
-                {/* {notesTest} */}
                 <AddNote/>
                 { notesTest }
             </div>
